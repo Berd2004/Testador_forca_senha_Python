@@ -4,7 +4,7 @@ import re
 
 
 def avalia_forca_senha(senha:str):
-    qtd_caracteres = len()
+    qtd_caracteres = len(senha)
     pontuacao = 0
     sugestoes = []
      
@@ -15,27 +15,27 @@ def avalia_forca_senha(senha:str):
         sugestoes.append("Use pelo menos 8 caracteres!")
         
     if qtd_caracteres > 12:
-        pontuacao  +=1
+        pontuacao +=1
     else:
         sugestoes.append("Recomenda-se usar senhas com 12 caracteres para maior segurança")       
         
         #Letras Maiusculas
     if re.search(r"[A-Z]", senha):
-        pontuacao  +=1  
+        pontuacao +=1  
         
     else:
         sugestoes.append("Adicione Letras Maiúsculas")        
          
     #Letras Minusculas
     if re.search(r"[a-z]", senha):
-        pontuacao  +=1  
+        pontuacao +=1  
         
     else:
         sugestoes.append("Adicione Letras Minusculas")    
         
     #Numeros 
     if re.search(r"\d", senha):
-        pontuacao  +=1  
+        pontuacao +=1  
         
     else:
         sugestoes.append("Adicione Números")     
@@ -58,16 +58,24 @@ def avalia_forca_senha(senha:str):
     return classificacao, pontuacao, sugestoes
     
     
+    
  # Função chamada ao clicar no botão   
 def verificar_senha():
     senha = campo_senha.get()
     classificacao, pontuacao, sugestoes = avalia_forca_senha(senha)
    
-   
-   
+    resultado_texto = f"Pontuação: {pontuacao}/7 → {classificacao}\n"
+    if sugestoes:
+        resultado_texto += "\nSugestões para melhorar sua senha:\n"
+        for dicas in sugestoes:
+            resultado_texto += f"- {dicas}\n"
+    else:
+        resultado_texto += "\nSua senha já é muito forte! 🚀"
 
-    
-        
+    # Mostra resultado na label
+    resultado_forca_senha.configure(text=resultado_texto)
+   
+       
 #configurando a aparência
 ctk.set_appearance_mode('dark')
 
@@ -86,11 +94,10 @@ campo_senha.pack(pady=6)
 
 
 ##botão
-
-botao = ctk.CTkButton(app, text='Testar', command='verificar_senha', width=75)
+botao = ctk.CTkButton(app, text='Testar', command=verificar_senha, width=75)
 botao.pack(pady=12)
 
-resultado_forca_senha = ctk.CTkLabel(app, text="", justify="left", font=("Arial", 11), fg="blue" )
+resultado_forca_senha = ctk.CTkLabel(app, text='', justify="left", font=("calibri", 15), text_color="white")
 resultado_forca_senha.pack(pady=10)
 
 
