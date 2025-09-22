@@ -46,14 +46,15 @@ def avalia_forca_senha(senha:str):
     else:
         sugestoes.append("Use caracteres especiais como @, #, _ , $...")
     
-    
     # Classificação
-    if pontuacao <= 2:
+    if pontuacao <= 3:
         classificacao = "Senha FRACA"
     elif pontuacao <= 4:
         classificacao = "Senha MÉDIA"
-    else:
+    elif pontuacao <= 5:
         classificacao = "Senha FORTE"
+    else:
+       classificacao = "Senha MUITO FORTE!"    
 
     return classificacao, pontuacao, sugestoes
     
@@ -64,13 +65,18 @@ def verificar_senha():
     senha = campo_senha.get()
     classificacao, pontuacao, sugestoes = avalia_forca_senha(senha)
    
-    resultado_texto = f"Pontuação: {pontuacao}/7 → {classificacao}\n"
+   #verifica se o usuário deixou o campo senha vazio
+    if not senha.strip():   
+        resultado_forca_senha.configure(text="Por favor, digite uma senha para testar!")
+        return
+   
+    resultado_texto = f"Pontuação: {pontuacao}/6 → {classificacao}\n"
     if sugestoes:
         resultado_texto += "\nSugestões para melhorar sua senha:\n"
         for dicas in sugestoes:
             resultado_texto += f"- {dicas}\n"
     else:
-        resultado_texto += "\nSua senha já é muito forte! 🚀"
+        resultado_texto += "\nSua senha já é muito forte, parabéns! 🚀"
 
     # Mostra resultado na label
     resultado_forca_senha.configure(text=resultado_texto)
@@ -82,7 +88,7 @@ ctk.set_appearance_mode('dark')
 # criação da janela principal
 app = ctk.CTk()
 app.title('Teste de Força de Senha') #É o título da tela (aparece o no topo)
-app.geometry('400x400') # Define o tamanho da tela do programa
+app.geometry('400x300') # Define o tamanho da tela do programa
 
 
 ##Campos
@@ -97,7 +103,7 @@ campo_senha.pack(pady=6)
 botao = ctk.CTkButton(app, text='Testar', command=verificar_senha, width=75)
 botao.pack(pady=12)
 
-resultado_forca_senha = ctk.CTkLabel(app, text='', justify="left", font=("calibri", 15), text_color="white")
+resultado_forca_senha = ctk.CTkLabel(app, text='', justify="left", font=("calibri", 13 , "bold"), text_color="white")
 resultado_forca_senha.pack(pady=10)
 
 
