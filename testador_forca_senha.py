@@ -79,18 +79,19 @@ app.geometry('400x400') # Define o tamanho da tela do programa
 
 ##Campos
 texto = ctk.CTkLabel(app, text='Teste de Força de Senha',font=("Arial", 25))
-texto.pack(pady='10')
+texto.pack(pady=10)
 
 campo_senha = ctk.CTkEntry(app, placeholder_text='Teste sua senha aqui', show='')
-campo_senha.pack(pady='6')
+campo_senha.pack(pady=6)
 
 
 ##botão
 
 botao = ctk.CTkButton(app, text='Testar', command='verificar_senha', width=75)
-botao.pack(pady='12')
+botao.pack(pady=12)
 
-resultado_forca_senha = ctk.CTkLabel(app, )
+resultado_forca_senha = ctk.CTkLabel(app, text="", justify="left", font=("Arial", 11), fg="blue" )
+resultado_forca_senha.pack(pady=10)
 
 
 #Iniciar a aplicação
