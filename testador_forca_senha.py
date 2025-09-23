@@ -51,7 +51,7 @@ def avalia_forca_senha(senha:str):
         classificacao = "Senha FRACA"
     elif pontuacao <= 4:
         classificacao = "Senha MÉDIA"
-    elif pontuacao <= 5:
+    elif pontuacao <= 6:
         classificacao = "Senha FORTE"
     else:
        classificacao = "Senha MUITO FORTE!"    
@@ -65,6 +65,10 @@ def verificar_senha():
     senha = campo_senha.get()
     classificacao, pontuacao, sugestoes = avalia_forca_senha(senha)
    
+    if len(senha) > 16:
+        resultado_forca_senha.configure(text="Por favor, digite uma senha de até 16 caracteres")
+        return
+        
    #verifica se o usuário deixou o campo senha vazio
     if not senha.strip():   
         resultado_forca_senha.configure(text="Por favor, digite uma senha para testar!")
